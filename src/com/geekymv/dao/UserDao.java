@@ -55,19 +55,7 @@ public class UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if(rs != null) {
-					rs.close();
-				}
-				if(ps != null) {
-					ps.close();
-				}
-				if(conn != null) {
-					conn.close();
-				}
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
+			DBUtil.colose(rs, ps, conn);
 		}
 		
 		return null;
@@ -120,22 +108,43 @@ public class UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if(rs != null) {
-					rs.close();
-				}
-				if(ps != null) {
-					ps.close();
-				}
-				if(conn != null) {
-					conn.close();
-				}
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
+			DBUtil.colose(rs, ps, conn);
 		}
 		
 		return null;
+	}
+
+	/**
+	 * 添加用户
+	 *
+	 * @author: miying
+	 * @createTime: 2015年7月25日 下午10:12:15
+	 * @history:
+	 * @param user void
+	 */
+	public int addUser(User user) {
+		String sql = "insert into t_users(username, password) values(?, ?)";
+		
+		Connection conn = DBUtil.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, user.getUsername());
+			ps.setString(2, user.getPassword());
+			
+			int res = ps.executeUpdate();
+			
+			return res;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.colose(rs, ps, conn);
+		}
+		
+		return 0;
+		
 	}
 
 }

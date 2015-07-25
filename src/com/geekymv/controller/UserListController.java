@@ -20,7 +20,7 @@ import com.google.gson.Gson;
  * @history:
  * @version: v1.0
  */
-public class UserController extends HttpServlet{
+public class UserListController extends HttpServlet{
 	private static final long serialVersionUID = 2297432045852339362L;
 	
 	/**

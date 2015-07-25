@@ -31,4 +31,30 @@ public class DBUtil {
 		return ct;
 	}
 	
+	/**
+	 * 关闭资源
+	 *
+	 * @author: miying
+	 * @createTime: 2015年7月25日 下午10:15:19
+	 * @history:
+	 * @param rs
+	 * @param ps
+	 * @param ct void
+	 */
+	public static void colose(ResultSet rs, PreparedStatement ps, Connection conn) {
+		try {
+			if(rs != null) {
+				rs.close();
+			}
+			if(ps != null) {
+				ps.close();
+			}
+			if(conn != null) {
+				conn.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

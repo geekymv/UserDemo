@@ -47,5 +47,17 @@ public class UserService {
 	public List<User> getAllUser() {
 		return userDao.queryAll();
 	}
+
+	/**
+	 * 添加用户
+	 *
+	 * @author: miying
+	 * @createTime: 2015年7月25日 下午10:11:29
+	 * @history:
+	 * @param user void
+	 */
+	public int addUser(User user) {
+		return userDao.addUser(user);
+	}
 	
 }

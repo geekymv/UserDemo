@@ -5,7 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>登录成功</title>
+<style type="text/css">
+	tr, td, th{
+		border: 1px solid #ccc;
+	}
+</style>
 </head>
+
 <body>
 	<!-- 从session中获取用户名 -->
 	欢迎${user.username } 访问...
@@ -20,10 +26,13 @@
 			</tr>
 		</thead>
 		<tbody id="users">
-		
 		</tbody>
+
 	</table>
 	
+	<hr/>
+	
+	<a href="${pageContext.request.contextPath }/addUser">添加用户</a>	
 	
 
 	
