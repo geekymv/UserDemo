@@ -43,7 +43,7 @@ public class LoginController extends HttpServlet{
 		 */
 		UserService userService = new UserService();
 		
-		String username = (String) req.getParameter("username");
+		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 	
 		User user = userService.login(username, password);

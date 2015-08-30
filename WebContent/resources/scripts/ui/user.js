@@ -36,7 +36,8 @@
 			return;
 		}
 		
-		datas.interests = interests.toString();
+//		datas.interests = interests.toString();
+		datas.interests = interests.join(',');
 		
 		// 上面几行代码相当于
 		/*

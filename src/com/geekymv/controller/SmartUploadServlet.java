@@ -15,11 +15,13 @@ public class SmartUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
+	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doPost(req, resp);
 	}
 
 	
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//设置上传文件保存路径
 		/*String filePath = "/images";*/
