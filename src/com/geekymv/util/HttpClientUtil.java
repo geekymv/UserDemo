@@ -7,28 +7,151 @@ import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.dom4j.Document;
-import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
 public class HttpClientUtil {
-	
+
 	public static void main(String[] args) {
-		String ip = "210.45.176.3";
-		String result = httpGet(ip);
-		System.out.println(result);
+//		String ip = "210.45.176.3";
+//		String result = httpGet(ip);
+//		System.out.println(result);
 		
-		List<String> results = parserXml(result);
+//		List<String> results = parserXml(result);
 		
-		System.out.println(results);
+//		System.out.println(results);
+
+	
+//		String res = httpPost();
+//		List<String> results = parserXml(res);
+//
+//		System.out.println(results);
+		
+		String host = "http://webservice.webxml.com.cn";
+		String uri = "/WebServices/WeatherWS.asmx/getWeather";
+		String url = host + uri;
+		
+		// 构造请求参数
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("theCityCode", "合肥"));
+		params.add(new BasicNameValuePair("theUserID", ""));
+		
+		requestPost(url, params);
 	}
+	
+	
+	
+	/**
+	 * http-post请求
+	 *
+	 * @author: miying
+	 * @createTime: 2015年9月12日 下午2:46:07
+	 * @history:
+	 * @param url 请求地址
+	 * @param params 请求参数
+	 * @return String
+	 */
+	public static String requestPost(final String url, final List<NameValuePair> params) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				CloseableHttpClient client = HttpClients.createDefault();
+				try {
+					HttpPost post = new HttpPost(url);
+					post.setHeader("User-Agent", 
+							"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.101 Safari/537.36");
+					// 设置请求参数
+					post.setEntity(new UrlEncodedFormEntity(params, "utf-8"));
+					
+					CloseableHttpResponse response = client.execute(post);
+					String result = EntityUtils.toString(response.getEntity(), "utf-8");
+					
+					System.out.println(result);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						if(client != null) {
+							client.close();
+						}
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+				
+			}
+		}).start();
+		
+		
+		return null;
+	} 
+	
+	
+	/**
+	 * post
+	 *
+	 * @author: miying
+	 * @createTime: 2015年9月12日 下午2:37:48
+	 * @history:
+	 * @return String
+	 */
+	public static String httpPost() {
+		String host = "http://webservice.webxml.com.cn";
+		String uri = "/WebServices/WeatherWS.asmx/getWeather";
+		String url = host + uri;
+		
+		CloseableHttpClient client = HttpClients.createDefault();
+		try {
+			HttpPost post = new HttpPost(url);
+			
+			// 构造请求参数
+			List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+			parameters.add(new BasicNameValuePair("theCityCode", "合肥"));
+			parameters.add(new BasicNameValuePair("theUserID", ""));
+		
+//			post.setHeader("Origin", "http://webservice.webxml.com.cn");
+//			post.setHeader("Content-Type", "application/x-www-form-urlencoded");
+			post.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.101 Safari/537.36");
+			
+			// 设置请求参数
+			post.setEntity(new UrlEncodedFormEntity(parameters, "utf-8"));
+			
+			CloseableHttpResponse response = client.execute(post);
+			
+			String res = EntityUtils.toString(response.getEntity(), "utf-8");
+			
+			System.out.println(res);
+			
+			return res;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(client != null) {
+					client.close();
+				}
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+		
+		return null;
+	}
+	
 
 	/**
 	 *
@@ -44,7 +167,7 @@ public class HttpClientUtil {
 	            HttpGet httpget = new HttpGet("http://www.webxml.com.cn"
 	            		+ "/WebServices/IpAddressSearchWebService.asmx/getCountryCityByIp?theIpAddress=" + ip);
 
-//	            System.out.println("Executing request " + httpget.getRequestLine());
+	            System.out.println("Executing request " + httpget.getRequestLine());
 	            ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
 	            	@Override
 	                public String handleResponse(
