@@ -5,7 +5,22 @@ import java.util.List;
 
 public class Test01 {
 	
+	public <T> T hello(String t){
+		return (T)t ;
+	}
+	
+	public static String[] strs = {"拾", "佰", "仟", "萬", "拾萬", "拾萬", "佰萬", "仟萬"};
+
+	// 1000
+	
+	
+	
 	public static void main(String[] args) {
+		Test01 test = new Test01();
+		
+		System.out.println(test.hello("1"));
+		
+		/*
 		Test01 test = new Test01();
 		String str = "123";
 		
@@ -29,6 +44,22 @@ public class Test01 {
 		}else {
 			System.out.println("用户输人的字符不都为数字，无法转换！！！");
 		}
+		*/
+//		System.out.println("个位 = " + 10120452 % 10);
+//		System.out.println("十位 = " + (10120452 / 10) % 10);
+//		System.out.println("百位 = " + (10120452 / 100) % 10);
+//		System.out.println("千位 = " + (10120452 / 1000) % 10);
+//		System.out.println("万位 = " + (10120452 / 10000) % 10);
+//		System.out.println("十万位 = " + (10120452 / 100000) % 10);
+//		System.out.println("百万位 = " + (10120452 / 1000000) % 10);
+//		System.out.println("千万位 = " + (10120452 / 10000000) % 10);
+//		int val = 10120452;
+//		String v = val+"";
+//		
+//		int div = 1;
+//		for(int i = 0, len = v.length(); i < len; i++) {
+//			
+//		}
 	}
 	
 	/**
