@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	
+	<input type="checkbox" name="language" value="html" />html
+	<input type="checkbox" name="language" value="css" />css
+	<input type="checkbox" name="language" value="javascript" />javascript
+	<input type="checkbox" name="language" value="jquery" />jquery
+	
+	<button id="show">显示选中checkbox</button>
+	
+	<script type="text/javascript" src="resources/scripts/jquery-1.8.3.min.js"></script>
+	
+	<script type="text/javascript">
+		$(function() {
+			
+			$('#show').click(function() {
+			
+				var languages = $('input[name=language]:checked');
+				var len = languages.length;	// 选中个数
+				
+				var lans = '';
+				for(var i = 0; i < len; i++) {
+					lans = lans + $(languages[i]).val() + ','; // $(languages[i]) 将domd对象转换成jquery对象
+				}
+				
+				lans = lans.substring(0, lans.length-1);	// 去除最后一个逗号
+				
+				alert(lans);
+				
+			});
+		
+		});
+					
+	</script>
+
+</body>
+</html>

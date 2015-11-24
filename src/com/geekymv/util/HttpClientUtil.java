@@ -14,6 +14,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
@@ -22,9 +23,47 @@ import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
-public class HttpClientUtil {
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
+public class HttpClientUtil {
+	
+	public static void requestJson() {
+		String host = "http://miying.sinaapp.com";
+		CloseableHttpClient client = HttpClients.createDefault();
+		
+		JsonObject jsonObject = new JsonObject();
+		jsonObject.addProperty("username", "miying");
+		jsonObject.addProperty("password", "123");
+
+//		System.out.println(jsonObject.toString());
+		
+		HttpPost post = new HttpPost(host+"/api/login/");
+		StringEntity entity = new StringEntity(jsonObject.toString(), "utf-8");
+		post.setEntity(entity);
+		
+		post.addHeader("Content-type","application/json;charset=UTF-8");  
+//		post.setHeader("Host", host);
+//		post.setHeader("Cookie", "saeut=CkMPGlYk1Ske2DcpGBPrAg==; csrftoken=NvwFYdB7ZPE2PnKCrG6IFHOLdThhT9yp; sessionid=uh7wy5d6wc5qhjst3jc38crxbhtv77mw");
+//		post.setHeader("Origin:", host);
+//		post.setHeader("Referer", host+"/api/");
+//		post.setHeader("Accept", "application/json");  
+//		post.setHeader("User-Agent", 
+//				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.101 Safari/537.36");
+		try {
+			HttpResponse response = client.execute(post);
+			String result = EntityUtils.toString(response.getEntity(), "utf-8");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	public static void main(String[] args) {
+		
+		requestJson();
+		
 //		String ip = "210.45.176.3";
 //		String result = httpGet(ip);
 //		System.out.println(result);
@@ -39,6 +78,7 @@ public class HttpClientUtil {
 //
 //		System.out.println(results);
 		
+		/*
 		String host = "http://webservice.webxml.com.cn";
 		String uri = "/WebServices/WeatherWS.asmx/getWeather";
 		String url = host + uri;
@@ -49,6 +89,8 @@ public class HttpClientUtil {
 		params.add(new BasicNameValuePair("theUserID", ""));
 		
 		requestPost(url, params);
+		*/
+		
 	}
 	
 	
