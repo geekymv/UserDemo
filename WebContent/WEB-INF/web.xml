@@ -17,6 +17,7 @@
     <servlet-name>login</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>user</servlet-name>
     <servlet-class>com.geekymv.controller.UserListController</servlet-class>
@@ -25,6 +26,7 @@
     <servlet-name>user</servlet-name>
     <url-pattern>/users</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>addUser</servlet-name>
     <servlet-class>com.geekymv.controller.AddUserController</servlet-class>
@@ -33,6 +35,7 @@
     <servlet-name>addUser</servlet-name>
     <url-pattern>/addUser</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>imgUpload</servlet-name>
     <servlet-class>com.geekymv.controller.SmartUploadServlet</servlet-class>
@@ -41,6 +44,7 @@
     <servlet-name>imgUpload</servlet-name>
     <url-pattern>/imgUpload</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>UserRegisterController</servlet-name>
     <servlet-class>com.geekymv.controller.UserRegisterController</servlet-class>
@@ -49,4 +53,19 @@
     <servlet-name>UserRegisterController</servlet-name>
     <url-pattern>/register</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>post</servlet-name>
+  	<servlet-class>com.geekymv.controller.PostController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>post</servlet-name>
+  	<url-pattern>/post</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
+  
+  
 </web-app>

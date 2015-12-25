@@ -22,11 +22,37 @@ import org.apache.http.util.EntityUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
+import org.junit.Test;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 public class HttpClientUtil {
+	
+	@Test
+	public void testPost() {
+		CloseableHttpClient client = HttpClients.createDefault();
+		HttpPost post = new HttpPost("http://localhost:8080/UserDemo/post");
+		
+		try {
+			HttpResponse response = client.execute(post);
+			
+			int statusCode = response.getStatusLine().getStatusCode();
+			
+			System.out.println(statusCode);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(client != null) {
+					client.close();
+				}
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+	
 	
 	public static void requestJson() {
 		String host = "http://miying.sinaapp.com";
@@ -56,6 +82,14 @@ public class HttpClientUtil {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				if(client != null) {
+					client.close();
+				}
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 		}
 	}
 	
