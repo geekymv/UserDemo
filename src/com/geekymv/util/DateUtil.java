@@ -4,16 +4,31 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class DateUtil {
+	
+	
 
 	// 测试
 	public static void main(String[] args) {
-		String startDate = "2014-10-16";
-		String endDate = "2015-10-16";
-		Integer day = daysBetween(startDate, endDate);
-
-		System.out.println(day); // out->365
+//		String startDate = "2014-10-16";
+//		String endDate = "2015-10-16";
+//		Integer day = daysBetween(startDate, endDate);
+//
+//		System.out.println(day); // out->365
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy K:m:s a",Locale.ENGLISH);
+		try {
+			Date d = sdf.parse("1/23/2014 12:00:00 PM");
+			sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String date = sdf.format(d);
+			
+			System.out.println(date);
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static SimpleDateFormat sdf = null;
